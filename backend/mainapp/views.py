@@ -6,8 +6,8 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-from .models import Environment
-from .serializers import EnvironmentSerializer
+from .models import Environment, Request
+from .serializers import EnvironmentSerializer, RequestSerializer
 
 # Create your views here.
 @api_view(["POST"])
@@ -103,3 +103,65 @@ def delEnv(request, id):
         return Response({"message": "Environment deleted"})
     except Environment.DoesNotExist:
         return Response({"error": "Environment not found"}, status=status.HTTP_404_NOT_FOUND)
+    
+# REQUESTS APIS
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def addRequest(request):
+    serializer = RequestSerializer(data=request.data)
+    if serializer.is_valid():
+        req = serializer.save()
+        return Response({"message":"Added Successfully"}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def getRequests(request):
+    reqs = Request.objects.all()
+    serializer = RequestSerializer(reqs, many=True)
+    return Response(serializer.data)
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def getCollectedRequests(request):
+    collected = Request.objects.filter(is_collected=True)
+    serializer = RequestSerializer(collected, many=True)
+    return Response(serializer.data)
+
+@api_view(["PUT"])
+@permission_classes([IsAuthenticated])
+def updateRequest(request, pk):
+    try:
+        req = Request.objects.get(pk=pk)
+    except Request.DoesNotExist:
+        return Response({"error": "Request not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = RequestSerializer(req, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({
+            "message":"Updated Successfully",
+            "data":serializer.data
+        })
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["DELETE"])
+@permission_classes([IsAuthenticated])
+def deleteRequest(request, pk):
+    try:
+        req = Request.objects.get(pk=pk)
+        req.delete()
+        return Response({"message": "Request deleted"})
+    except Request.DoesNotExist:
+        return Response({"error": "Request not found"}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def getSpecificRequest(request, pk):
+    try:
+        req = Request.objects.get(pk=pk)
+        serializer = RequestSerializer(req)
+        return Response(serializer.data)
+    except Request.DoesNotExist:
+        return Response({"error": "Request not found"}, status=status.HTTP_404_NOT_FOUND)
