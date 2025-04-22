@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('theme-toggle');
     const searchInput = document.getElementById('variable-search');
     const addVariableBtn = document.getElementById('add-variable-btn');
@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const variableNameInput = document.getElementById('variable-name');
     const variableValueInput = document.getElementById('variable-value');
     const closeModalButtons = document.querySelectorAll('.close-modal');
+    const baseUrl = BE_URL;
+    const token = localStorage.getItem("access_token");
 
     let currentEditId = null;
     let allVariables = [];
@@ -36,17 +38,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function fetchVariables() {
-        showLoader();
-        fetch(`${baseUrl}/getVariables`, {
+        // showLoader();
+        fetch(`${baseUrl}/envs/`, {
             headers: { Authorization: `Bearer ${token}` }
         })
-            .then(handleResponse)
-            .then(data => {
-                allVariables = data;
-                renderVariables(allVariables);
-            })
-            .catch(showError)
-            .finally(hideLoader);
+        .then(handleResponse)
+        .then(data => {
+            allVariables = data;
+            renderVariables(allVariables);
+        })
+        .catch(showError)
+        // .finally(hideLoader);
     }
 
     function renderVariables(variables) {
@@ -116,12 +118,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!name || !value) return alert('Please fill in all fields.');
 
         const variableData = { name, value };
-        const url = currentEditId
+        const url = currentEditId 
             ? `${baseUrl}/updateVariable/${currentEditId}/`
             : `${baseUrl}/addVariable/`;
         const method = currentEditId ? 'PUT' : 'POST';
 
-        showLoader();
+        // showLoader();
         fetch(url, {
             method: method,
             headers: {
@@ -130,38 +132,58 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify(variableData)
         })
-            .then(handleResponse)
-            .then(response => {
-                alert(response.message);
-                fetchVariables();
-                closeModal();
-            })
-            .catch(showError)
-            .finally(hideLoader);
+        .then(handleResponse)
+        .then(response => {
+            alert(response.message);
+            fetchVariables();
+            closeModal();
+        })
+        .catch(showError)
+        // .finally(hideLoader);
     }
 
     function deleteVariableHandler(id) {
         if (!confirm('Are you sure you want to delete this variable?')) return;
 
-        showLoader();
+        // showLoader();
         fetch(`${baseUrl}/deleteVariable/${id}/`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}` }
         })
-            .then(handleResponse)
-            .then(response => {
-                alert(response.message);
-                fetchVariables();
-            })
-            .catch(showError)
-            .finally(hideLoader);
+        .then(handleResponse)
+        .then(response => {
+            alert(response.message);
+            fetchVariables();
+        })
+        .catch(showError)
+        // .finally(hideLoader);
+    }
+    
+    function handleResponse(response) {
+        if (!response.ok) {
+            return response.json().then(error => {
+                throw error;
+            });
+        }
+        return response.json();
+    }
+
+    function showError(error) {
+        console.error("Error: ", error);
+        let errorMessage = "An error occurred.";
+        if (error?.response?.status === 401) {
+            alert("Session expired. Redirecting to login...");
+            window.location.href = "../index.html";
+            return;
+        }
+        if (error.error) {
+            errorMessage = error.error;
+        } else if (error.message) {
+            errorMessage = error.message;
+        } else if (typeof error === 'string') {
+            errorMessage = error;
+        }
+    
+        alert(errorMessage);
     }
 });
-
-function showLoader() {
-    document.getElementById('loader-overlay').style.display = 'flex';
-}
-
-function hideLoader() {
-    document.getElementById('loader-overlay').style.display = 'none';
-}
