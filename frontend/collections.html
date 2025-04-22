@@ -1,11 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collections</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Nexus - Collections</title>
+    <link rel="stylesheet" href="/styles/collections.css" />
 </head>
+
 <body>
-    
+    <nav class="navbar">
+        <div class="logo">
+            <span>API Nexus</span>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active">Builder</button>
+            <button class="nav-btn">Collections</button>
+            <button class="nav-btn">Environments</button>
+            <button class="nav-btn">History</button>
+        </div>
+        <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+    </nav>
+
+    <main class="collections-container">
+        <div class="collections-header">
+            <input type="text" id="search" placeholder="Search saved requests..." />
+            <button id="addRequestBtn">+ Add Request</button>
+        </div>
+
+        <div id="collectionsList" class="collections-list">
+            <p class="empty-state">No saved requests yet.</p>
+        </div>
+    </main>
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modalTitle">Add Request</h2>
+            <input type="text" id="requestName" placeholder="Request Name" />
+            <select id="requestType">
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+            </select>
+            <textarea id="requestData" placeholder="Request URL or Data..."></textarea>
+            <div class="modal-actions">
+                <button id="saveRequest">Submit</button>
+                <button onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- <script src="script.js"></script> -->
 </body>
+
 </html>
