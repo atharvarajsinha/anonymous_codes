@@ -1,30 +1,34 @@
 const baseUrl = BE_URL;
-const form = document.getElementById('signup-form');
+const form = document.getElementById('login-form');
+localStorage.clear();
+document.addEventListener("DOMContentLoaded", () => {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+        const identifier = document.getElementById('email').value;
+        console.log(identifier);
+        const password = document.getElementById('password').value;
 
-    const username = document.getElementById('username').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
+        try {
+            const response = await fetch(`${baseUrl}/login/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ identifier, password })
+            });
 
-    try {
-      const response = await fetch(`${baseUrl}/signup/`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password })
-      });
+            const data = await response.json();
 
-      const data = await response.json();
-
-      if (response.ok) {
-        alert(data.message);
-        window.location.href = '../requirements.html';
-      } else {
-        alert(data.error || 'Signin failed');
-      }
-    } catch (error) {
-      console.error(error);
-      alert('Something went wrong');
-    }
-  });
+            if (response.ok) {
+                alert(data.message);
+                localStorage.setItem("access_token", data.access);
+                localStorage.setItem("refresh_token", data.refresh);
+                window.location.href = '../environments.html';
+            } else {
+                alert(data.error || 'Signin failed');
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Something went wrong');
+        }
+    });
+});
