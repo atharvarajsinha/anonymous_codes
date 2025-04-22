@@ -4,34 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Environment Variables</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles/environments.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="logo">
             <span class="logo-icon"><i class="fas fa-leaf"></i></span>
-            <span>EnvManager</span>
+            <span>API Nexus</span>
         </div>
-        
-        <nav class="main-nav">
-            <ul>
+    
+        <nav class="main-nav" id="main-nav">
+            <ul id="nav-links">
                 <li><a href="#"><i class="fas fa-cubes"></i> Builder</a></li>
                 <li><a href="#"><i class="fas fa-folder"></i> Collections</a></li>
                 <li class="active"><a href="#"><i class="fas fa-server"></i> Environments</a></li>
                 <li><a href="#"><i class="fas fa-history"></i> History</a></li>
+                <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
-        
+    
         <div class="header-actions">
             <button id="theme-toggle" class="btn btn-secondary">
                 <i class="fas fa-moon"></i>
             </button>
-            <button class="mobile-menu-btn">
+            <button class="mobile-menu-btn" id="mobile-toggle">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
-    </header>
+    </header>    
 
     <main>
         <section class="hero">
@@ -90,11 +91,13 @@
     </div>
 
     <!-- Loading Overlay -->
-    <div id="loader-overlay" class="loader-overlay">
-        <div class="spinner"></div>
+    <div id="loader" style="display: none;">
+        <div class="loader-overlay">
+            <div class="spinner"></div>
+        </div>
     </div>
 
-    <script src="data.js"></script>
-    <script src="/script.js"></script>
+    <script src="/srcipts/data.js"></script>
+    <script src="/srcipts/environments.js"></script>
 </body>
 </html>
