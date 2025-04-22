@@ -11,20 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeModalButtons = document.querySelectorAll('.close-modal');
     const baseUrl = BE_URL;
     const token = localStorage.getItem("access_token");
-    const toggleBtn = document.getElementById('mobile-toggle');
-    const navLinks = document.getElementById('nav-links');
-    const logoutBtn = document.getElementById('logout-btn');
-
-    toggleBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-
-    logoutBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        localStorage.clear();
-        alert('Logged out successfully');
-        window.location.href = './index.html';
-    });
 
     let currentEditId = null;
     let allVariables = [];
@@ -52,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function fetchVariables() {
-        showLoader();
+        // showLoader();
         fetch(`${baseUrl}/envs/`, {
             headers: { Authorization: `Bearer ${token}` }
         })
@@ -62,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             renderVariables(allVariables);
         })
         .catch(showError)
-        .finally(hideLoader);
+        // .finally(hideLoader);
     }
 
     function renderVariables(variables) {
@@ -71,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             : variables.map((variable, index) => `
                 <tr>
                     <td>${index + 1}</td>
-                    <td>${variable.variable_name}</td>
+                    <td>${variable.name}</td>
                     <td>${variable.value}</td>
                     <td>
                         <div class="action-buttons">
@@ -96,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleSearch() {
         const searchTerm = searchInput.value.trim().toLowerCase();
-        const filtered = allVariables.filter(v => v.variable_name.toLowerCase().includes(searchTerm));
+        const filtered = allVariables.filter(v => v.name.toLowerCase().includes(searchTerm));
         renderVariables(filtered);
     }
 
@@ -113,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (variable) {
             currentEditId = id;
             modalTitle.textContent = 'Edit Variable';
-            variableNameInput.value = variable.variable_name;
+            variableNameInput.value = variable.name;
             variableValueInput.value = variable.value;
             variableModal.style.display = 'block';
         }
@@ -127,17 +113,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleVariableSubmit(e) {
         e.preventDefault();
 
-        const variable_name = variableNameInput.value.trim();
+        const name = variableNameInput.value.trim();
         const value = variableValueInput.value.trim();
-        if (!variable_name || !value) return alert('Please fill in all fields.');
+        if (!name || !value) return alert('Please fill in all fields.');
 
-        const variableData = { variable_name, value };
+        const variableData = { name, value };
         const url = currentEditId 
-            ? `${baseUrl}/envs/update/${currentEditId}/`
-            : `${baseUrl}/envs/add/`;
+            ? `${baseUrl}/updateVariable/${currentEditId}/`
+            : `${baseUrl}/addVariable/`;
         const method = currentEditId ? 'PUT' : 'POST';
 
-        showLoader();
+        // showLoader();
         fetch(url, {
             method: method,
             headers: {
@@ -149,18 +135,18 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(handleResponse)
         .then(response => {
             alert(response.message);
-            fetchVariables(response.id);
+            fetchVariables();
             closeModal();
         })
         .catch(showError)
-        .finally(hideLoader);
+        // .finally(hideLoader);
     }
 
     function deleteVariableHandler(id) {
         if (!confirm('Are you sure you want to delete this variable?')) return;
 
-        showLoader();
-        fetch(`${baseUrl}/envs/delete/${id}/`, {
+        // showLoader();
+        fetch(`${baseUrl}/deleteVariable/${id}/`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}` }
         })
@@ -170,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fetchVariables();
         })
         .catch(showError)
-        .finally(hideLoader);
+        // .finally(hideLoader);
     }
     
     function handleResponse(response) {

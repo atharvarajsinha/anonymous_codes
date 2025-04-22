@@ -379,56 +379,31 @@ tr:hover {
     #add-variable-btn {
         width: 100%;
     }
-    .main-nav ul {
-        flex-direction: column;
-        gap: 10px;
-        position: absolute;
-        top: 72px;
-        right: 0;
-        background-color: var(--primary-dark);
-        width: 100%;
-        padding: 16px;
-        display: none;
-        z-index: 9;
-    }
-
-    .main-nav ul.active {
-        display: flex;
-    }
-
-    .mobile-menu-btn {
-        display: block;
-    }
 }
-
-#loader .loader-overlay {
+/* Loader Overlay */
+.loader-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.8);
-    display: flex;
-    justify-content: center;
+    display: none;
     align-items: center;
-    z-index: 9999;
+    justify-content: center;
+    z-index: 1000;
 }
 
-#loader .spinner {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
-    border-radius: 50%;
+.loader-overlay .spinner {
     width: 60px;
     height: 60px;
+    border: 6px solid #ccc;
+    border-top: 6px solid #2e7d32;
+    border-radius: 50%;
     animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
 }
