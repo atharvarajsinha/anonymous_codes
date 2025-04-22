@@ -196,7 +196,12 @@ th, td {
     padding: 12px 16px;
     text-align: left;
     border-bottom: 1px solid var(--light-2);
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    max-width: 200px; /* You can adjust this value as needed */
 }
+
 
 th {
     background-color: var(--light-2);
