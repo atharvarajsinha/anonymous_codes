@@ -3,9 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Environments</title>
+    <title>Environment Variables</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    
+    <header>
+        <div class="logo">
+            <span class="logo-icon"><i class="fas fa-leaf"></i></span>
+            <span>EnvManager</span>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#"><i class="fas fa-cubes"></i> Builder</a></li>
+                <li><a href="#"><i class="fas fa-folder"></i> Collections</a></li>
+                <li class="active"><a href="#"><i class="fas fa-server"></i> Environments</a></li>
+                <li><a href="#"><i class="fas fa-history"></i> History</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-actions">
+            <button id="theme-toggle" class="btn btn-secondary">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="search-add-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="variable-search" placeholder="Search variables...">
+                </div>
+                <button id="add-variable-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add Variable
+                </button>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Variable</th>
+                            <th>Value</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="variables-table-body">
+                        <!-- Variables will be inserted here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for adding/editing variables -->
+    <div id="variable-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New Variable</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="variable-form">
+                    <div class="form-group">
+                        <label for="variable-name">Variable Name</label>
+                        <input type="text" id="variable-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="variable-value">Value</label>
+                        <textarea id="variable-value" rows="3" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loader-overlay" class="loader-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="/script.js"></script>
 </body>
 </html>
