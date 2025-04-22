@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
         const identifier = document.getElementById('email').value;
-        console.log(identifier);
         const password = document.getElementById('password').value;
 
         try {
