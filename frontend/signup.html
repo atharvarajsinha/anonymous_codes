@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SignUp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-white">
+    <div class="flex h-screen w-screen">
+        <div class="hidden md:block w-2/5">
+            <img src="https://i.pinimg.com/736x/90/d2/f3/90d2f30379512664487d47e765ab1635.jpg"
+                class="w-full h-full object-cover" alt="Login Illustration" />
+        </div>
+
+        <div class="flex flex-col justify-center items-center w-full md:w-3/5 bg-white p-8">
+            <h1 class="text-4xl font-bold text-left mb-6 text-gray-700">Sign Up</h1>
+
+            <form class="space-y-6 w-full max-w-md">
+                <div>
+                    <label class="block text-gray-600 text-sm font-semibold">Email</label>
+                    <input type="text" name="Username"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        placeholder="Enter your email" required />
+                </div>
+                <div>
+                    <label class="block text-gray-600 text-sm font-semibold">Username</label>
+                    <input type="email" name="email"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        placeholder="Enter your email" required />
+                </div>
+                <div>
+                    <label class="block text-gray-600 text-sm font-semibold">Password</label>
+                    <input type="password" name="password"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        placeholder="Enter your password" required />
+                </div>
+                <div>
+                    <label class="block text-gray-600 text-sm font-semibold">Re-enter Password</label>
+                    <input type="password" name="password"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        placeholder="Re-enter your password" required />
+                </div>
+                <div class="flex justify-center mt-8 mb-2">
+                    <button type="submit"
+                        class="w-50 bg-blue-500 text-white font-bold py-2 px-6 rounded-md hover:bg-blue-600 transition duration-300">
+                        Sign Up
+                    </button>
+                </div>
+            </form>
+
+            <p class="text-gray-600 text-sm text-center mt-4">
+                Already have an account?
+                <a href="/login.html" class="text-blue-500 hover:underline"> Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="srcipts/data.js"></script>
+    <script src="srcipts/signup.js"></script>
+
+</body>
+
+</html>
