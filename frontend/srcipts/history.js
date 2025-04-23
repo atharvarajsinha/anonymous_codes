@@ -1,116 +1,173 @@
-// History file
-document.addEventListener('DOMContentLoaded', function() {
-    const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
-    const tableBody = document.getElementById('history-table-body');
+document.addEventListener('DOMContentLoaded', () => {
+    const elements = {
+        historyTableBody: document.getElementById('history-table-body'),
+        searchInput: document.getElementById('variable-search'),
+        themeToggle: document.getElementById('theme-toggle'),
+        toggleBtn: document.getElementById('mobile-toggle'),
+        mainNav: document.getElementById('main-nav'),
+        logoutBtn: document.getElementById('logout-btn'),
+        loaderOverlay: document.getElementById('loader-overlay')
+    };
 
-    function initTheme() {
-        const savedTheme = localStorage.getItem('theme') ||
-                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        body.setAttribute('data-theme', savedTheme);
-        updateThemeIcon(savedTheme);
+    for (const [key, element] of Object.entries(elements)) {
+        if (!element) {
+            console.error(`Element ${key} not found`);
+            return;
+        }
     }
 
-    function updateThemeIcon(theme) {
-        const icon = themeToggle.querySelector('i');
-        icon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    let allRequests = [];
+    const baseUrl = BE_URL; 
+    const token = localStorage.getItem('access_token');
+
+    // Initialization
+    function init() {
+        fetchAllRequests();
+        setupEventListeners();
+        initTheme();
+    }
+
+    // Event Listeners Setup
+    function setupEventListeners() {
+        elements.searchInput.addEventListener('input', filterRequests);
+        elements.toggleBtn.addEventListener('click', toggleMobileMenu);
+        elements.logoutBtn.addEventListener('click', handleLogout);
+        elements.themeToggle.addEventListener('click', toggleTheme);
+        document.querySelector('.btn-primary').addEventListener('click', () => {
+            filterRequests();
+        });
+    }
+
+    function toggleMobileMenu() {
+        elements.mainNav.classList.toggle('active');
+        elements.toggleBtn.classList.toggle('active');
+    }
+
+    function initTheme() {
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+        elements.themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     }
 
     function toggleTheme() {
-        const currentTheme = body.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        body.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
+        const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+        document.documentElement.setAttribute('data-theme', isDarkMode ? 'light' : 'dark');
+        localStorage.setItem('darkMode', !isDarkMode);
+        elements.themeToggle.innerHTML = !isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     }
 
-    function fetchHistory() {
-        showLoader();
+    function handleLogout(e) {
+        e.preventDefault();
+        localStorage.clear();
+        window.location.href = './index.html';
+    }
 
-        fetch(`${baseUrl}/getHistory`, { 
-            headers: { Authorization: Bearer `${token}` }
+    function fetchAllRequests() {
+        showLoader();
+        fetch(`${baseUrl}/requests/`, {
+            headers: { 
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
         })
-            .then(response => response.json())
-            .then(data => renderTable(data))
-            .catch(err => {
-                console.error(err);
-                alert('Failed to load history.');
+            .then(handleResponse)
+            .then(data => {
+                allRequests = Array.isArray(data) ? data : [];
+                renderRequests(allRequests);
             })
+            .catch(showError)
             .finally(hideLoader);
     }
 
-    function renderTable(history) {
-        if (!history.length) {
-            tableBody.innerHTML = <tr><td colspan="3" style="text-align:center;">No history records found.</td></tr>;
+    function renderRequests(requests) {
+        try {
+            elements.historyTableBody.innerHTML = '';
+
+            if (!requests || requests.length === 0) {
+                elements.historyTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="empty-message">No requests found in history</td>
+                    </tr>
+                `;
+                return;
+            }
+
+            requests.forEach(request => {
+                const row = document.createElement('tr');
+                row.dataset.id = request.id;
+                row.style.cursor = 'pointer';
+
+                row.innerHTML = `
+                    <td><span class="method-badge ${request.request_method.toLowerCase()}">${request.request_method}</span></td>
+                    <td>${request.request_name || 'Unnamed Request'}</td>
+                    <td class="url-cell">${request.request_url || ''}</td>
+                `;
+
+                row.addEventListener('click', () => {
+                    window.location.href = `builder.html?id=${request.id}`;
+                });
+
+                elements.historyTableBody.appendChild(row);
+            });
+        } catch (error) {
+            console.error('Error rendering requests:', error);
+            showError({ message: 'Failed to display requests' });
+        }
+    }
+
+    function filterRequests() {
+        const searchTerm = elements.searchInput.value.toLowerCase();
+        const filtered = allRequests.filter(request => {
+            const name = request.request_name?.toLowerCase() || '';
+            const url = request.request_url?.toLowerCase() || '';
+            const method = request.request_method?.toLowerCase() || '';
+            return name.includes(searchTerm) || url.includes(searchTerm) || method.includes(searchTerm);
+        });
+        renderRequests(filtered);
+    }
+
+    function handleResponse(response) {
+        if (!response.ok) {
+            return response.json().then(error => {
+                throw error;
+            });
+        }
+        return response.json();
+    }
+
+    function showError(error) {
+        console.error("Error:", error);
+        let errorMessage = "An error occurred while fetching requests.";
+        
+        if (error?.response?.status === 401) {
+            alert("Session expired. Please login again.");
+            window.location.href = "./index.html";
             return;
         }
+        
+        if (error.error) errorMessage = error.error;
+        else if (error.message) errorMessage = error.message;
 
-        tableBody.innerHTML = history.map(record => `
-            <tr data-id="${record.id}">
-                <td><span class="method-badge ${record.method.toLowerCase()}">${record.method}</span></td>
-                <td>${record.name}</td>
-                <td>${record.url}</td>
-            </tr>
-        `).join('');
-
-        setupTableRowClicks();  // Re-bind click after render
-    }
-
-    function setupTableRowClicks() {
-        document.querySelectorAll('.history-table tbody tr').forEach(row => {
-            row.addEventListener('click', function() {
-                const requestId = this.getAttribute('data-id');
-                window.location.href = `builder.html?id=${requestId}`;
-            });
-        });
-    }
-
-    function setupSearch() {
-        const searchInput = document.getElementById('variable-search');
-        const searchButton = document.querySelector('.search-container .btn');
-
-        function performSearch() {
-            const searchTerm = searchInput.value.toLowerCase();
-            document.querySelectorAll('.history-table tbody tr').forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(searchTerm) ? '' : 'none';
-            });
-        }
-
-        searchButton.addEventListener('click', performSearch);
-        searchInput.addEventListener('keypress', e => {
-            if (e.key === 'Enter') performSearch();
-        });
-    }
-
-    function setupMobileMenu() {
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const mainNav = document.querySelector('.main-nav');
-
-        if (mobileMenuBtn && mainNav) {
-            mobileMenuBtn.addEventListener('click', () => {
-                const isVisible = mainNav.style.display === 'block';
-                mainNav.style.display = isVisible ? 'none' : 'block';
-                if (!isVisible) mainNav.style.animation = 'fadeIn 0.3s ease-in-out';
-            });
+        try {
+            elements.historyTableBody.innerHTML = `
+                <tr>
+                    <td colspan="3" class="error-message">${errorMessage}</td>
+                </tr>
+            `;
+        } catch (e) {
+            console.error('Failed to display error:', e);
+            alert(errorMessage);
         }
     }
 
     function showLoader() {
-        document.getElementById('loader-overlay').style.display = 'flex';
+        elements.loaderOverlay.style.display = 'flex';
     }
 
     function hideLoader() {
-        document.getElementById('loader-overlay').style.display = 'none';
+        elements.loaderOverlay.style.display = 'none';
     }
 
-    function init() {
-        initTheme();
-        themeToggle.addEventListener('click', toggleTheme);
-        fetchHistory();
-        setupSearch();
-        setupMobileMenu();
-    }
-
+    // Initialize the application
     init();
 });
