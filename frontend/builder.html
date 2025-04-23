@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Nexus - Postman Alternative</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles/builder.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span class="logo-icon"><i class="fas fa-leaf"></i></span>
+            <span>API Nexus</span>
+        </div>
+
+        <nav class="main-nav" id="main-nav">
+            <ul id="nav-links">
+                <li><a href="#"><i class="fas fa-cubes"></i> Builder</a></li>
+                <li><a href="collections.html"><i class="fas fa-folder"></i> Collections</a></li>
+                <li><a href="environments.html"><i class="fas fa-server"></i> Environments</a></li>
+                <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <button id="theme-toggle" class="btn btn-secondary">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="mobile-menu-btn" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <section id="builder" class="content-section active">
+            <div class="request-controls">
+                <select class="request-method get">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="DELETE">DELETE</option>
+                </select>
+                <input type="text" class="request-url" placeholder="Enter request URL" value="{{base_url}}/posts">
+                <button class="request-send">
+                    <i class="fas fa-paper-plane"></i> Send
+                </button>
+            </div>
+
+            <div class="request-tabs">
+                <div class="request-tab active" data-tab="params">Params</div>
+                <div class="request-tab" data-tab="auth">Auth</div>
+                <div class="request-tab" data-tab="headers">Headers</div>
+                <div class="request-tab" data-tab="body">Body</div>
+            </div>
+
+            <div class="tab-content active" id="params-tab">
+                <div class="param-inputs">
+                    <div class="param-row">
+                        <input type="text" placeholder="Key" class="param-key">
+                        <input type="text" placeholder="Value" class="param-value">
+                        <button class="btn btn-secondary param-delete"><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-secondary add-variable" data-target="param-value">
+                            <i class="fas fa-cube"></i> Add Variable
+                        </button>
+                    </div>
+                </div>
+                <button class="btn btn-secondary add-param">
+                    <i class="fas fa-plus"></i> Add Param
+                </button>
+            </div>
+
+            <div class="tab-content" id="auth-tab">
+                <select class="auth-type">
+                    <option value="none">No Auth</option>
+                    <option value="bearer">Bearer Token</option>
+                    <option value="basic">Basic Auth</option>
+                </select>
+
+                <div class="auth-content" id="bearer-auth">
+                    <input type="text" placeholder="Bearer Token" class="auth-input" value="{{api_token}}">
+                    <button class="btn btn-secondary add-variable" data-target="auth-input">
+                        <i class="fas fa-cube"></i> Add Variable
+                    </button>
+                </div>
+
+                <div class="auth-content" id="basic-auth">
+                    <input type="text" placeholder="Username" class="auth-input" value="{{username}}">
+                    <button class="btn btn-secondary add-variable" data-target="username-input">
+                        <i class="fas fa-cube"></i> Add Variable
+                    </button>
+                    <input type="password" placeholder="Password" class="auth-input" value="{{password}}">
+                    <button class="btn btn-secondary add-variable" data-target="password-input">
+                        <i class="fas fa-cube"></i> Add Variable
+                    </button>
+                </div>
+            </div>
+
+            <div class="tab-content" id="headers-tab">
+                <div class="header-inputs">
+                    <div class="header-row">
+                        <input type="text" placeholder="Header" class="header-key" value="Content-Type">
+                        <input type="text" placeholder="Value" class="header-value" value="application/json">
+                        <button class="btn btn-secondary header-delete"><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-secondary add-variable" data-target="header-value">
+                            <i class="fas fa-cube"></i> Add Variable
+                        </button>
+                    </div>
+                    <div class="header-row">
+                        <input type="text" placeholder="Header" class="header-key" value="Accept">
+                        <input type="text" placeholder="Value" class="header-value" value="application/json">
+                        <button class="btn btn-secondary header-delete"><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-secondary add-variable" data-target="header-value">
+                            <i class="fas fa-cube"></i> Add Variable
+                        </button>
+                    </div>
+                </div>
+                <button class="btn btn-secondary add-header">
+                    <i class="fas fa-plus"></i> Add Header
+                </button>
+            </div>
+
+            <div class="tab-content" id="body-tab">
+                <div class="body-type-selector">
+                    <div class="body-type active" data-type="none">None</div>
+                    <div class="body-type" data-type="raw">Raw JSON</div>
+                    <div class="body-type" data-type="form-data">Form Data</div>
+                </div>
+
+                <div class="body-content" id="raw-body">
+                    <textarea class="raw-input" placeholder='{
+  "id": {{post_id}},
+  "title": "{{post_title}}"
+}'></textarea>
+                    <button class="btn btn-secondary add-variable" data-target="raw-input">
+                        <i class="fas fa-cube"></i> Add Variable
+                    </button>
+                </div>
+
+                <div class="body-content" id="form-data-body">
+                    <div class="form-data-row">
+                        <input type="text" placeholder="Key" class="form-data-key">
+                        <input type="text" placeholder="Value" class="form-data-value">
+                        <button class="btn btn-secondary form-data-delete"><i class="fas fa-trash"></i></button>
+                        <button class="btn btn-secondary add-variable" data-target="form-data-value">
+                            <i class="fas fa-cube"></i> Add Variable
+                        </button>
+                    </div>
+                    <button class="btn btn-secondary add-form-data">
+                        <i class="fas fa-plus"></i> Add Form Data
+                    </button>
+                </div>
+            </div>
+
+            <div class="response-container">
+                <div class="response-header">
+                    <div class="response-status">
+                        <div class="status-badge">No Response</div>
+                        <div class="response-time"></div>
+                    </div>
+                    <div class="response-actions">
+                        <button class="btn btn-secondary" id="pretty-response">
+                            <i class="fas fa-code"></i> Pretty
+                        </button>
+                        <button class="btn btn-secondary" id="copy-response">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+
+                <div class="response-content active" id="response-body">
+                    <pre><code>Send a request to see the response</code></pre>
+                </div>
+            </div>
+
+            <!-- Variable Modal -->
+            <div class="modal" id="variable-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Insert Variable</h3>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="variable-list">
+                            <!-- Variables will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="environments" class="content-section">
+            <h2>Environment Variables</h2>
+            <div class="env-controls">
+                <button class="btn btn-primary" id="fetch-env-vars">
+                    <i class="fas fa-sync-alt"></i> Fetch Variables
+                </button>
+                <button class="btn btn-secondary" id="add-env-var">
+                    <i class="fas fa-plus"></i> Add Variable
+                </button>
+            </div>
+            <div class="env-variables">
+                <div class="env-var-row">
+                    <input type="text" class="env-var-key" placeholder="Variable Name" value="base_url">
+                    <input type="text" class="env-var-value" placeholder="Variable Value"
+                        value="https://jsonplaceholder.typicode.com">
+                    <button class="btn btn-secondary env-var-delete"><i class="fas fa-trash"></i></button>
+                </div>
+                <div class="env-var-row">
+                    <input type="text" class="env-var-key" placeholder="Variable Name" value="api_token">
+                    <input type="text" class="env-var-value" placeholder="Variable Value" value="abc123">
+                    <button class="btn btn-secondary env-var-delete"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+            <div class="env-actions">
+                <button class="btn btn-primary" id="save-env-vars">
+                    <i class="fas fa-save"></i> Save Variables
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script src="srcipts/builder.js"></script>
+</body>
+
+</html>
