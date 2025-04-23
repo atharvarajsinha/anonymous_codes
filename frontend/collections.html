@@ -1,11 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collections</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Nexus - Collections</title>
+    <link rel="stylesheet" href="/styles/collections.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
+    <header>
+        <div class="logo">
+            <span class="logo-icon"><i class="fas fa-leaf"></i></span>
+            <span>API Nexus</span>
+        </div>
     
+        <nav class="main-nav" id="main-nav">
+            <ul id="nav-links">
+                <li><a href="#"><i class="fas fa-cubes"></i> Builder</a></li>
+                <li><a href="collections.html"><i class="fas fa-folder"></i> Collections</a></li>
+                <li><a href="environments.html"><i class="fas fa-server"></i> Environments</a></li>
+                <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+    
+        <div class="header-actions">
+            <button id="theme-toggle" class="btn btn-secondary">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="mobile-menu-btn" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>    
+
+    <main class="collections-container">
+        <div class="collections-header">
+            <input type="text" id="search" placeholder="Search saved requests..." />
+            <button id="addRequestBtn">+ Add Request</button>
+        </div>
+
+        <div id="collectionsList" class="collections-list">
+            <!-- Empty state message -->
+            <p class="empty-state">No saved requests yet.</p>
+
+            <!-- Requests table -->
+            <table id="requestsTable" class="requests-table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Request Method</th>
+                        <th>Request Name</th>
+                        <th>Request URL</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Requests will be populated here dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal for adding or editing requests -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modalTitle">Add Request</h2>
+            <input type="text" id="requestName" placeholder="Request Name" />
+            <select id="requestType">
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+            </select>
+            <textarea id="requestData" placeholder="Request URL or Data..."></textarea>
+            <div class="modal-actions">
+                <button id="saveRequest">Submit</button>
+                <button id="cancelRequest">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loader" style="display: none;">
+        <div class="loader-overlay">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <script src="/srcipts/data.js"></script>
+    <script src="/srcipts/collections.js"></script>
 </body>
 </html>
