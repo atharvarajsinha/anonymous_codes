@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Client - History</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="h.css">
+    <link rel="stylesheet" href="styles/history.css">
 </head>
+
 <body>
     <header>
         <div class="logo">
-            <span class="logo-icon"><i class="fas fa-bolt"></i></span>
-            <span>API Client</span>
+            <span class="logo-icon"><i class="fas fa-leaf"></i></span>
+            <span>API Nexus</span>
         </div>
-        
-        <nav class="main-nav">
-            <ul>
-                <li><a href="builder.html"><i class="fas fa-tools"></i> Builder</a></li>
-                <li><a href="#"><i class="fas fa-folder"></i> Collections</a></li>
-                <li><a href="#"><i class="fas fa-server"></i> Environments</a></li>
-                <li class="active"><a href="#"><i class="fas fa-history"></i> History</a></li>
+
+        <nav class="main-nav" id="main-nav">
+            <ul id="nav-links">
+                <li><a href="#"><i class="fas fa-cubes"></i> Builder</a></li>
+                <li><a href="collections.html"><i class="fas fa-folder"></i> Collections</a></li>
+                <li><a href="environments.html"><i class="fas fa-server"></i> Environments</a></li>
+                <li><a href="history.html"><i class="fas fa-history"></i> History</a></li>
+                <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </nav>
-        
+
         <div class="header-actions">
             <button id="theme-toggle" class="btn btn-secondary">
                 <i class="fas fa-moon"></i>
             </button>
+            <button class="mobile-menu-btn" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        
-        <button class="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </button>
     </header>
 
     <main class="container">
@@ -44,25 +46,28 @@
             </div>
         </section>
 
-        <section class="history-table">
-            <thead>
-                <tr>
-                    <th>Method</th>
-                    <th>Request Name</th>
-                    <th>URL</th>
-                </tr>
-            </thead>
-            <tbody id="history-table-body">
-                <!-- Dynamic rows will be inserted here -->
-            </tbody>            
+        <section class="table-container">
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Request Name</th>
+                        <th>URL</th>
+                    </tr>
+                </thead>
+                <tbody id="history-table-body">
+                    <!-- Dynamic rows will be inserted here -->
+                </tbody>
+            </table>
         </section>
     </main>
 
-    <!-- Loading Overlay -->
     <div id="loader-overlay" class="loader-overlay">
         <div class="spinner"></div>
     </div>
 
-    <script src="h.js"></script>
+    <script src="srcipts/data.js"></script>
+    <script src="srcipts/history.js"></script>
 </body>
+
 </html>
