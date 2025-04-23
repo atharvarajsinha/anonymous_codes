@@ -4,80 +4,210 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Nexus - About</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/styles/about.css">
 </head>
 <body>
     <div class="app-container">
         <nav class="top-navbar">
             <div class="nav-left">
-                <div class="app-title">API Nexus</div>
+                <div class="app-title">
+                    <i class="fas fa-leaf"></i> API Nexus
+                </div>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="nav-link">Builder</a></li>
-                    <li><a href="collections.html" class="nav-link">Collections</a></li>
-                    <li><a href="environments.html" class="nav-link">Environments</a></li>
-                    <li><a href="history.html" class="nav-link">History</a></li>
-                    <li><a href="about.html" class="nav-link active">About</a></li>
+                    <li><a href="index.html" class="nav-link"><i class="fas fa-code"></i> Builder</a></li>
+                    <li><a href="collections.html" class="nav-link"><i class="fas fa-folder"></i> Collections</a></li>
+                    <li><a href="environments.html" class="nav-link"><i class="fas fa-server"></i> Environments</a></li>
+                    <li><a href="history.html" class="nav-link"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="about.html" class="nav-link active"><i class="fas fa-info-circle"></i> About</a></li>
                 </ul>
             </div>
             <div class="nav-right">
                 <div class="theme-toggle">
-                    <span class="toggle-icon">🌙</span>
                     <label class="switch">
                         <input type="checkbox" id="darkModeToggle">
                         <span class="slider round"></span>
                     </label>
+                    <span class="toggle-icon"><i class="fas fa-moon"></i></span>
                 </div>
+
+                <div class="auth-buttons">
+                    <a href="/login" class="btn btn-login">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a href="/signup" class="btn btn-signup">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </a>
+                </div>
+                
             </div>
         </nav>
 
         <main class="main-content">
-            <div class="about-container">
-                <section class="about-section">
+            <div class="about-hero">
+                <div class="hero-content">
                     <h1 class="about-title">API Nexus</h1>
-                    <p class="about-description">Save and manage your API requests easily in one place with an intuitive,developermfriendly interface</p>
-                </section>
+                    <h6 class="slog">Test locally, Think Globally</h6>
+                    <p class="about-description">Save and manage your API requests easily in one place with an intuitive, developer-friendly interface</p>
+                    <div class="hero-illustration">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                </div>
+            </div>
 
-                <section class="about-section">
-                    <h2 class="section-title">Key Features</h2>
-                    <ul class="features-list">
-                        <li>Save, edit, and delete API requests</li>
-                        <li>Search requests quickly</li>
-                        <li>Dark mode toggle for comfort</li>
-                        <!-- <li>LocalStorage support to persist data</li> -->
-                    </ul>
-                </section>
-
-                <section class="about-section">
-                    <h2 class="section-title">Tech Stack</h2>
-                    <div class="tech-stack">
-                        <span class="tech-item">HTML</span>
-                        <span class="tech-item">CSS</span>
-                        <span class="tech-item">JavaScript</span>
-                        <span class="tech-item">Django</span>
+            <div class="about-container">
+                <section class="about-section feature-cards">
+                    <h2 class="section-title"><i class="fas fa-star"></i> Key Features</h2>
+                    <div class="cards-container">
+                        <div class="feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3>Rapid API Testing</h3>
+                            <p>Send requests and view responses in real-time with our intuitive interface</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-folder-tree"></i>
+                            </div>
+                            <h3>Request Organization</h3>
+                            <p>Create collections to organize your API workflows</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h3>Advanced Authentication</h3>
+                            <p>Support Bearer tokens and Basic Auth</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <h3>Request History</h3>
+                            <p>Automatic saving of recent requests for quick access</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <h3>Dark/Light Mode</h3>
+                            <p>Toggle between themes to reduce eye strain during long sessions</p>
+                        </div>
                     </div>
                 </section>
 
-                <section class="about-section">
-                    <h2 class="section-title">Usage Instructions</h2>
-                    <ol class="instructions-list">
-                        <li>Click "Add Request" to create a new API request</li>
-                        <li>Use the ✏️ icon to edit, and 🗑️ to delete requests</li>
-                        <li>Use the search bar to filter saved requests</li>
-                        <li>Toggle dark/light mode with the 🌙 icon</li>
-                    </ol>
+                <section class="about-section tech-stack-section">
+                    <h2 class="section-title"><i class="fas fa-layer-group"></i> Tech Stack</h2>
+                    <div class="tech-bubbles">
+                        <div class="tech-bubble">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="tech-bubble">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="tech-bubble">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="tech-bubble">
+                            <i class="fab fa-python"></i>
+                            <span>Django</span>
+                        </div>
+                    </div>
                 </section>
 
-                <section class="about-section">
-                    <h2 class="section-title">Credits</h2>
-                    <div class="credits-info">
-                        <p>BuildForGehu'25</p>
-                        <p>Team: API Nexus</p>
-                        <ul class="team-list">
-                            <li>Atharva Raj Sinha – </li>
-                            <li>Vatsala Verma – </li>
-                            <li>Chinmay Mewari– </li>
-                            <li>Rahul Joshi   – </li>
-                        </ul>
+                <section class="about-section instructions-section">
+                    <h2 class="section-title"><i class="fas fa-book-open"></i> Usage Guide</h2>
+                    <div class="steps-container">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Create Requests</h3>
+                                <p>Click "Add Request" to create new API endpoints with various methods (GET, POST, PUT, etc.)</p>
+                                <ul class="step-details">
+                                    <li>Select HTTP method from dropdown</li>
+                                    <li>Enter complete endpoint URL</li>
+                                    <li>Save frequently used requests</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Manage Requests</h3>
+                                <p>Organize your API workflow with powerful management tools</p>
+                                <ul class="step-details">
+                                    <li>Use ✏️ to edit existing requests</li>
+                                    <li>Click 🗑️ to remove unused requests</li>
+                                    <li>Organize requests into collections</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Configure Requests</h3>
+                                <p>Customize every aspect of your API calls</p>
+                                <ul class="step-details">
+                                    <li>Add headers and authentication</li>
+                                    <li>Include query parameters</li>
+                                    <li>Set request body with multiple formats</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Test & Debug</h3>
+                                <p>Get detailed insights into your API responses</p>
+                                <ul class="step-details">
+                                    <li>View response status codes and timing</li>
+                                    <li>Inspect headers and cookies</li>
+                                    <li>Pretty-print JSON responses</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="about-section team-section">
+                    <h2 class="section-title"><i class="fas fa-users"></i> Our Team</h2>
+                    <div class="team-members">
+                        <div class="member-card">
+                            <div class="member-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Atharva Raj Sinha</h3>
+                            <p>Backend Developer</p>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Vatsala Verma</h3>
+                            <p>Frontend Developer</p>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Chinmay Mewari</h3>
+                            <p>Frontend Designer</p>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Rahul Joshi</h3>
+                            <p>Frontend Developer</p>
+                        </div>
+                    </div>
+                    <div class="event-badge">
+                        <i class="fas fa-trophy"></i>
+                        <span> The Spring has been hacked </span>
                     </div>
                 </section>
             </div>
