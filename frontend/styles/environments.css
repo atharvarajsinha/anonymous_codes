@@ -192,14 +192,16 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
     padding: 12px 16px;
     text-align: left;
     border-bottom: 1px solid var(--light-2);
     word-wrap: break-word;
     word-break: break-word;
     white-space: normal;
-    max-width: 200px; /* You can adjust this value as needed */
+    max-width: 200px;
+    /* You can adjust this value as needed */
 }
 
 
@@ -277,6 +279,7 @@ tr:hover {
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -367,23 +370,24 @@ tr:hover {
     .main-nav ul {
         display: none;
     }
-    
+
     .mobile-menu-btn {
         display: block;
     }
-    
+
     .search-add-container {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .search-box {
         max-width: 100%;
     }
-    
+
     #add-variable-btn {
         width: 100%;
     }
+
     .main-nav ul {
         flex-direction: column;
         gap: 10px;

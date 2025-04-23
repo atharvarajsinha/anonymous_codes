@@ -234,13 +234,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function showError(error) {
         console.error("Error: ", error);
         let errorMessage = "An error occurred.";
-        
+
         if (error?.response?.status === 401) {
             alert("Session expired. Redirecting to login...");
             window.location.href = "../index.html";
             return;
         }
-        
+
         if (error.error) {
             errorMessage = error.error;
         } else if (error.message) {

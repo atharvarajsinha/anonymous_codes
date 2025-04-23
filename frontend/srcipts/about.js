@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Dark Mode Toggle
     const darkModeToggle = document.getElementById('darkModeToggle');
-    
+
     // Check for saved theme preference
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.add('dark-mode');
         darkModeToggle.checked = true;
     }
-    
+
     // Toggle dark mode
-    darkModeToggle.addEventListener('change', function() {
+    darkModeToggle.addEventListener('change', function () {
         if (this.checked) {
             document.body.classList.add('dark-mode');
             localStorage.setItem('theme', 'dark');
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('theme', 'light');
         }
     });
-    
+
     // Update theme when system preference changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
         if (!localStorage.getItem('theme')) {
@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
+
     // Set active nav link
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     navLinks.forEach(link => {
         const linkPage = link.getAttribute('href');
         if (currentPage === linkPage) {

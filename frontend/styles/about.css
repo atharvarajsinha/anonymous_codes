@@ -200,11 +200,11 @@ body {
     border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: var(--primary-color);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     transform: translateX(26px);
 }
 
@@ -369,10 +369,21 @@ input:checked + .slider:before {
     font-weight: 500;
 }
 
-.fa-html5 { color: #e34f26; }
-.fa-css3-alt { color: #1572b6; }
-.fa-js { color: #f7df1e; }
-.fa-python { color: #3776ab; }
+.fa-html5 {
+    color: #e34f26;
+}
+
+.fa-css3-alt {
+    color: #1572b6;
+}
+
+.fa-js {
+    color: #f7df1e;
+}
+
+.fa-python {
+    color: #3776ab;
+}
 
 /* Instructions */
 .steps-container {
@@ -491,9 +502,17 @@ input:checked + .slider:before {
 
 /* Animations */
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 /* Responsive Styles */
@@ -553,15 +572,18 @@ input:checked + .slider:before {
         font-size: 1.5rem;
     }
 
-    .feature-card, .step, .member-card {
+    .feature-card,
+    .step,
+    .member-card {
         padding: 1.25rem;
     }
 
     .auth-buttons {
         gap: 0.5rem;
     }
-    
-    .btn-login, .btn-signup {
+
+    .btn-login,
+    .btn-signup {
         padding: 0.5rem 0.75rem;
         font-size: 0.9rem;
     }

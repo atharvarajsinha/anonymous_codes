@@ -105,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
             request_url: url,
             is_collected: currentRequestId ? "true" : "false"
         };
-        console.log(requestData);
         const endpoint = currentRequestId
             ? `${BASE_URL}/requests/update/${currentRequestId}/`
             : `${BASE_URL}/requests/add/`;

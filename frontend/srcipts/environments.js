@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const themeToggle = document.getElementById('theme-toggle');
     const searchInput = document.getElementById('variable-search');
     const addVariableBtn = document.getElementById('add-variable-btn');
@@ -56,13 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`${baseUrl}/envs/`, {
             headers: { Authorization: `Bearer ${token}` }
         })
-        .then(handleResponse)
-        .then(data => {
-            allVariables = data;
-            renderVariables(allVariables);
-        })
-        .catch(showError)
-        .finally(hideLoader);
+            .then(handleResponse)
+            .then(data => {
+                allVariables = data;
+                renderVariables(allVariables);
+            })
+            .catch(showError)
+            .finally(hideLoader);
     }
 
     function renderVariables(variables) {
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!variable_name || !value) return alert('Please fill in all fields.');
 
         const variableData = { variable_name, value };
-        const url = currentEditId 
+        const url = currentEditId
             ? `${baseUrl}/envs/update/${currentEditId}/`
             : `${baseUrl}/envs/add/`;
         const method = currentEditId ? 'PUT' : 'POST';
@@ -146,14 +146,14 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify(variableData)
         })
-        .then(handleResponse)
-        .then(response => {
-            alert(response.message);
-            fetchVariables(response.id);
-            closeModal();
-        })
-        .catch(showError)
-        .finally(hideLoader);
+            .then(handleResponse)
+            .then(response => {
+                alert(response.message);
+                fetchVariables(response.id);
+                closeModal();
+            })
+            .catch(showError)
+            .finally(hideLoader);
     }
 
     function deleteVariableHandler(id) {
@@ -164,15 +164,15 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}` }
         })
-        .then(handleResponse)
-        .then(response => {
-            alert(response.message);
-            fetchVariables();
-        })
-        .catch(showError)
-        .finally(hideLoader);
+            .then(handleResponse)
+            .then(response => {
+                alert(response.message);
+                fetchVariables();
+            })
+            .catch(showError)
+            .finally(hideLoader);
     }
-    
+
     function handleResponse(response) {
         if (!response.ok) {
             return response.json().then(error => {
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (typeof error === 'string') {
             errorMessage = error;
         }
-    
+
         alert(errorMessage);
     }
 });

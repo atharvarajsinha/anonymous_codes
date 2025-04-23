@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SignUp - API Nexus</title>
+    <title>Login - API Nexus</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -16,20 +16,14 @@
         </div>
 
         <div class="flex flex-col justify-center items-center w-full md:w-3/5 bg-white p-8">
-            <h1 class="text-4xl font-bold text-left mb-6 text-gray-700">Sign Up</h1>
+            <h1 class="text-4xl font-bold text-left mb-6 text-gray-700">Login</h1>
 
-            <form id="signup-form" class="space-y-6 w-full max-w-md">
+            <form id="login-form" class="space-y-6 w-full max-w-md">
                 <div>
                     <label class="block text-gray-600 text-sm font-semibold">Email</label>
-                    <input type="text" name="Username" id="email"
+                    <input type="email" name="email" id="email"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                         placeholder="Enter your email" required />
-                </div>
-                <div>
-                    <label class="block text-gray-600 text-sm font-semibold">Username</label>
-                    <input type="text" name="text" id="username"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        placeholder="Enter your username" required />
                 </div>
                 <div>
                     <label class="block text-gray-600 text-sm font-semibold">Password</label>
@@ -37,29 +31,23 @@
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                         placeholder="Enter your password" required />
                 </div>
-                <div>
-                    <label class="block text-gray-600 text-sm font-semibold">Re-enter Password</label>
-                    <input type="password" name="password"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        placeholder="Re-enter your password" required />
-                </div>
                 <div class="flex justify-center mt-8 mb-2">
                     <button type="submit"
                         class="w-50 bg-blue-500 text-white font-bold py-2 px-6 rounded-md hover:bg-blue-600 transition duration-300">
-                        Sign Up
+                        Login
                     </button>
                 </div>
             </form>
 
             <p class="text-gray-600 text-sm text-center mt-4">
-                Already have an account?
-                <a href="/login.html" class="text-blue-500 hover:underline"> Login</a>
+                Do not have an account?
+                <a href="/signup.html" class="text-blue-500 hover:underline"> Sign up</a>
             </p>
         </div>
     </div>
 
-    <script src="srcipts/data.js"></script>
-    <script src="srcipts/signup.js"></script>
+    <script src="./srcipts/data.js"></script>
+    <script src="./srcipts/login.js"></script>
 
 </body>
 

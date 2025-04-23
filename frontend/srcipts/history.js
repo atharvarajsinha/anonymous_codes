@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let allRequests = [];
-    const baseUrl = BE_URL; 
+    const baseUrl = BE_URL;
     const token = localStorage.getItem('access_token');
 
     // Initialization
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function fetchAllRequests() {
         showLoader();
         fetch(`${baseUrl}/requests/`, {
-            headers: { 
+            headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
@@ -138,13 +138,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function showError(error) {
         console.error("Error:", error);
         let errorMessage = "An error occurred while fetching requests.";
-        
+
         if (error?.response?.status === 401) {
             alert("Session expired. Please login again.");
             window.location.href = "./index.html";
             return;
         }
-        
+
         if (error.error) errorMessage = error.error;
         else if (error.message) errorMessage = error.message;
 

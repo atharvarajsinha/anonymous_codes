@@ -289,7 +289,8 @@ header {
     gap: 8px;
 }
 
-.btn-edit, .btn-delete {
+.btn-edit,
+.btn-delete {
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -426,30 +427,31 @@ header {
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     #search {
         width: 100%;
     }
-    
+
     .requests-table {
         display: block;
         overflow-x: auto;
     }
-    
-    .requests-table th, 
+
+    .requests-table th,
     .requests-table td {
         padding: 10px 12px;
         font-size: 0.9rem;
     }
-    
+
     .method-badge {
         min-width: 50px;
         font-size: 0.7rem;
     }
+
     .main-nav ul {
         display: none;
     }
-    
+
     .mobile-menu-btn {
         display: block;
     }
@@ -480,17 +482,17 @@ header {
     .collections-container {
         padding: 16px;
     }
-    
+
     .modal-content {
         padding: 20px;
         margin: 0 16px;
     }
-    
+
     .requests-table th:nth-child(1),
     .requests-table td:nth-child(1) {
         display: none;
     }
-    
+
     .url-cell {
         max-width: 150px;
     }
@@ -502,6 +504,7 @@ header {
         opacity: 0;
         visibility: hidden;
     }
+
     to {
         opacity: 1;
         visibility: visible;
@@ -512,6 +515,7 @@ header {
     from {
         transform: translateY(-20px);
     }
+
     to {
         transform: translateY(0);
     }

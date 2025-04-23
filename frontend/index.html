@@ -1,54 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Nexus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles/about.css">
 </head>
-
-<body class="bg-white">
-    <div class="flex h-screen w-screen">
-        <div class="hidden md:block w-2/5">
-            <img src="https://i.pinimg.com/736x/90/d2/f3/90d2f30379512664487d47e765ab1635.jpg"
-                class="w-full h-full object-cover" alt="Login Illustration" />
-        </div>
-
-        <div class="flex flex-col justify-center items-center w-full md:w-3/5 bg-white p-8">
-            <h1 class="text-4xl font-bold text-left mb-6 text-gray-700">Login</h1>
-
-            <form id="login-form" class="space-y-6 w-full max-w-md">
-                <div>
-                    <label class="block text-gray-600 text-sm font-semibold">Email</label>
-                    <input type="email" name="email" id="email"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        placeholder="Enter your email" required />
+<body>
+    <div class="app-container">
+        <nav class="top-navbar">
+            <div class="nav-left">
+                <div class="app-title">
+                    <i class="fas fa-leaf"></i> API Nexus
                 </div>
-                <div>
-                    <label class="block text-gray-600 text-sm font-semibold">Password</label>
-                    <input type="password" name="password" id="password"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        placeholder="Enter your password" required />
+            </div>
+            <div class="nav-right">
+                <div class="theme-toggle">
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="toggle-icon"><i class="fas fa-moon"></i></span>
                 </div>
-                <div class="flex justify-center mt-8 mb-2">
-                    <button type="submit"
-                        class="w-50 bg-blue-500 text-white font-bold py-2 px-6 rounded-md hover:bg-blue-600 transition duration-300">
-                        Login
-                    </button>
-                </div>
-            </form>
 
-            <p class="text-gray-600 text-sm text-center mt-4">
-                Do not have an account?
-                <a href="/signup.html" class="text-blue-500 hover:underline"> Sign up</a>
-            </p>
-        </div>
+                <div class="auth-buttons">
+                    <a href="/login.html" class="btn btn-login">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a href="/signup.html" class="btn btn-signup">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </a>
+                </div>
+                
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="about-hero">
+                <div class="hero-content">
+                    <h1 class="about-title">API Nexus</h1>
+                    <h6 class="slog">Test locally, Think Globally</h6>
+                    <p class="about-description">Save and manage your API requests easily in one place with an intuitive, developer-friendly interface</p>
+                    <div class="hero-illustration">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-container">
+                <section class="about-section feature-cards">
+                    <h2 class="section-title"><i class="fas fa-star"></i> Key Features</h2>
+                    <div class="cards-container">
+                        <div class="feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3>Rapid API Testing</h3>
+                            <p>Send requests and view responses in real-time with our intuitive interface</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-folder-tree"></i>
+                            </div>
+                            <h3>Request Organization</h3>
+                            <p>Create collections to organize your API workflows</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h3>Advanced Authentication</h3>
+                            <p>Support Bearer tokens and Basic Auth</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-history"></i>
+                            </div>
+                            <h3>Request History</h3>
+                            <p>Automatic saving of recent requests for quick access</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="card-icon">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                            <h3>Dark/Light Mode</h3>
+                            <p>Toggle between themes to reduce eye strain during long sessions</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="about-section tech-stack-section">
+                    <h2 class="section-title"><i class="fas fa-layer-group"></i> Tech Stack</h2>
+                    <div class="tech-bubbles">
+                        <div class="tech-bubble">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="tech-bubble">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="tech-bubble">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="tech-bubble">
+                            <i class="fab fa-python"></i>
+                            <span>Django</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="about-section instructions-section">
+                    <h2 class="section-title"><i class="fas fa-book-open"></i> Usage Guide</h2>
+                    <div class="steps-container">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Create Requests</h3>
+                                <p>Click "Add Request" to create new API endpoints with various methods (GET, POST, PUT, etc.)</p>
+                                <ul class="step-details">
+                                    <li>Select HTTP method from dropdown</li>
+                                    <li>Enter complete endpoint URL</li>
+                                    <li>Save frequently used requests</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Manage Requests</h3>
+                                <p>Organize your API workflow with powerful management tools</p>
+                                <ul class="step-details">
+                                    <li>Use ✏️ to edit existing requests</li>
+                                    <li>Click 🗑️ to remove unused requests</li>
+                                    <li>Organize requests into collections</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Configure Requests</h3>
+                                <p>Customize every aspect of your API calls</p>
+                                <ul class="step-details">
+                                    <li>Add headers and authentication</li>
+                                    <li>Include query parameters</li>
+                                    <li>Set request body with multiple formats</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Test & Debug</h3>
+                                <p>Get detailed insights into your API responses</p>
+                                <ul class="step-details">
+                                    <li>View response status codes and timing</li>
+                                    <li>Inspect headers and cookies</li>
+                                    <li>Pretty-print JSON responses</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="about-section team-section">
+                    <h2 class="section-title"><i class="fas fa-users"></i> Our Team</h2>
+                    <div class="team-members">
+                        <div class="member-card">
+                            <div class="member-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Atharva Raj Sinha</h3>
+                            <p>Backend Developer</p>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Vatsala Verma</h3>
+                            <p>Frontend Developer</p>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Chinmay Mewari</h3>
+                            <p>Frontend Designer</p>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Rahul Joshi</h3>
+                            <p>Frontend Developer</p>
+                        </div>
+                    </div>
+                    <div class="event-badge">
+                        <i class="fas fa-trophy"></i>
+                        <span> The Spring has been hacked </span>
+                    </div>
+                </section>
+            </div>
+        </main>
     </div>
 
-    <script src="./srcipts/data.js"></script>
-    <script src="./srcipts/login.js"></script>
-
+    <script src="/srcipts/about.js"></script>
 </body>
-
 </html>
